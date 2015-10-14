@@ -6,7 +6,7 @@ import javax.ws.rs.Path;
 
 
 @Path("/analysis")
-public class HelloResource {
+public class Analysis {
 
 	@GET
 	public String analysis(

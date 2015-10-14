@@ -1,22 +1,23 @@
 $(document).ready(function() {
 
-	$('#metadata-submit').on('click', function(e) {
+	$("#metadata-submit").on("click", function(e) {
 		e.preventDefault();
-		var title = $("#title").val(),
-			keywords = $("#keywords").val(),
-			summary = $("#summary").val();
+		var title = $("#title").val();
 		if (validateForm() == true) {
 			// request message on server
-			xhrGet("api/hello", function(responseText){
-				alert(responseText);
-
+			xhrGet("api/analysis", function(responseText){
+				$("#objective").prop( "disabled", false);
+				$("#methods").prop( "disabled", false);
+				$("#topics").prop( "disabled", false);
+				$("#objective").val(title);
+				$("#methods").val(responseText);
 			}, function(err){
 				console.log(err);
 			});
 		}
 	});
 	
-	$('#keywords').tokenfield({delimiter: ','});
+	$("#keywords").tokenfield({delimiter: ","});
 
 });
 
@@ -29,11 +30,11 @@ function validateForm() {
 	return true;
 }
 
-$('#upload').click(function() {
+$("#upload").click(function() {
 	if (!window.FileReader) {
-		alert('Your browser is not supported');
+		alert("Your browser is not supported");
 	}
-	$('#files').click();
+	$("#files").click();
 });
 
 $("#files").change(function(e) {
@@ -42,25 +43,25 @@ $("#files").change(function(e) {
 	if (input.files.length) {
 		var textFile = input.files[0];
 		reader.readAsText(textFile);
-		$(reader).on('load', processFile);
+		$(reader).on("load", processFile);
 	}
 });
 
 //utilities
 function processFile(e) {
 	var file = e.target.result;
-	$('#summary').val(file);
+	$("#summary").val(file);
 }
 
 function createXHR(){
-	if(typeof XMLHttpRequest != 'undefined'){
+	if(typeof XMLHttpRequest != "undefined"){
 		return new XMLHttpRequest();
 	}else{
 		try{
-			return new ActiveXObject('Msxml2.XMLHTTP');
+			return new ActiveXObject("Msxml2.XMLHTTP");
 		}catch(e){
 			try{
-				return new ActiveXObject('Microsoft.XMLHTTP');
+				return new ActiveXObject("Microsoft.XMLHTTP");
 			}catch(e){}
 		}
 	}
@@ -75,7 +76,7 @@ function xhrGet(url, callback, errback){
 			if(xhr.status >= 200){
 				callback(xhr.responseText);
 			}else{
-				errback('service not available');
+				errback("service not available");
 			}
 		}
 	};

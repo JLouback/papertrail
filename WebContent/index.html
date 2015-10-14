@@ -49,11 +49,11 @@
 	        <form id="metadata-form">
 			  <div class="form-group">
 			    <p>Title</p>
-			    <textarea id="title" class="form-control my-form" rows="1"></textarea>
+			    <textarea id="title" name="title" class="form-control my-form" rows="1"></textarea>
 			    <p>Comma-separated keywords</p>
-			    <textarea id="keywords" class="form-control my-form" rows="1"></textarea>
+			    <textarea id="keywords" name="keywords" class="form-control my-form" rows="1"></textarea>
 			    <p>Abstract (enter or upload)</p>
-			    <textarea id="summary" class="form-control my-form" rows="10"></textarea>
+			    <textarea id="summary" name="summary" class="form-control my-form" rows="10"></textarea>
 			  </div>
 			  <button type="button" id="metadata-submit" class="btn btn-default">Submit</button>
 			  <span class="btn btn-default glyphicon glyphicon-upload" id="upload"> Upload</span>
@@ -71,7 +71,7 @@
 			    <p>Topics</p>
 			    <textarea id="topics" class="form-control my-form" rows="4" disabled=true></textarea>
 			  </div>
-			  <button type="submit" class="btn btn-default" disabled=true>Confirm</button>
+			  <button type="submit" id="confirm" class="btn btn-default" disabled=true>Confirm</button>
 			</form>
 		  </div>
 	      </div>
