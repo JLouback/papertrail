@@ -10,10 +10,11 @@
 
     <title>Paper Trails</title>
 
-    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
+    <link href="css/bootstrap-tokenfield.min.css" rel="stylesheet">
+ 
+    <!-- Custom styles -->
     <link href="css/style.css" rel="stylesheet">
   </head>
 
@@ -48,11 +49,11 @@
 	        <form id="metadata-form">
 			  <div class="form-group">
 			    <p>Title</p>
-			    <textarea id="title" class="form-control my-form" rows="2"></textarea>
+			    <textarea id="title" class="form-control my-form" rows="1"></textarea>
 			    <p>Comma-separated keywords</p>
-			    <textarea id="keywords" class="form-control my-form" rows="2"></textarea>
+			    <textarea id="keywords" class="form-control my-form" rows="1"></textarea>
 			    <p>Abstract (enter or upload)</p>
-			    <textarea id="summary" class="form-control my-form" rows="8"></textarea>
+			    <textarea id="summary" class="form-control my-form" rows="10"></textarea>
 			  </div>
 			  <button type="button" id="metadata-submit" class="btn btn-default">Submit</button>
 			  <span class="btn btn-default glyphicon glyphicon-upload" id="upload"> Upload</span>
@@ -68,7 +69,7 @@
 			    <p>Methods</p>
 			    <textarea id="methods" class="form-control my-form" rows="4" disabled=true></textarea>
 			    <p>Topics</p>
-			    <textarea  id="topics" class="form-control my-form" rows="4" disabled=true></textarea>
+			    <textarea id="topics" class="form-control my-form" rows="4" disabled=true></textarea>
 			  </div>
 			  <button type="submit" class="btn btn-default" disabled=true>Confirm</button>
 			</form>
@@ -87,6 +88,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/jquery-1.11.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-tokenfield.js"></script>
     <script src="js/index.js"></script>
   </body>
 </html>

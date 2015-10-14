@@ -15,6 +15,8 @@ $(document).ready(function() {
 			});
 		}
 	});
+	
+	$('#keywords').tokenfield({delimiter: ','});
 
 });
 
