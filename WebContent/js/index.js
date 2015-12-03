@@ -13,7 +13,7 @@ $(document).ready(function() {
 			xhrPost("api/analysis", title, keywords, summary, function(responseText){
 				var keywordArray = $.parseJSON(responseText);
 				$("#myTabs li").removeClass('disabled');
-				var counter = 1;
+				var counter = 2;
 				$.each(keywordArray, function(key, item) {
 					if (item.relevance < 0.6) {
 						return false;
@@ -105,7 +105,7 @@ function collapsePanel(word, relevance, counter) {
 	var html = "<div class=\"panel panel-default\">\n<div class=\"panel-heading\">\n" +
 	"<h4 class=\"panel-title\">\n"+
 	"<a data-toggle=\"collapse\" data-parent=\"#trend-analysis\" href=\"#collapse" + counter + "\">\n" +
-	"<b>" + word + "</b>  |  Relevance score:" + relevance +"</a>\n</h4>\n</div>\n" +
+	"<b>Academia Trend: " + word + "</b>  |  Relevance score:" + relevance +"</a>\n</h4>\n</div>\n" +
 	"<div id=\"collapse" + counter + "\" class=\"panel-collapse collapse\">" +
 	"<div class=\"panel-body\">Lorem ipsum dolor sit amet, consectetur adipisicing elit," +
 	"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam," +
