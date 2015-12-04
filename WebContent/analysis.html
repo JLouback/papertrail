@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Paper Trails</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-tokenfield.min.css" rel="stylesheet">
+ 
+    <!-- Custom styles -->
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a style="padding-left:0;" href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container main-content">
+
+		<img src="images/pt_logo.png"/>
+        
+        <div id="tab-menu">
+	    <ul id="myTabs" class="nav nav-tabs" role="tablist">
+	      <li role="presentation"><a class="a-tab" href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Data Entry</a></li>
+	      <li role="presentation"><a class="a-tab" href="#resources" id="resources-tab" role="tab" data-toggle="tab" aria-controls="resources">Resources</a></li>
+	      <li role="presentation"class="active"><a class="a-tab" href="#trend" id="trend-tab" role="tab" data-toggle="tab" aria-controls="trend">Trend analysis</a></li>
+	    </ul>
+	    <div id="myTabContent" class="tab-content">
+	      <div role="tabpanel" class="tab-pane fade" id="home" aria-labelledBy="home-tab">
+	      <div class="col-md-12 extra-padded">
+	        <h2>Enter research metadata and abstract:</h2>
+	        <form id="metadata-form">
+			  <div class="form-group">
+			    <p>Title</p>
+			    <textarea id="title" name="title" class="form-control" style="width:50%;" rows="1"></textarea>
+			    <p>Comma-separated keywords</p>
+			    <textarea id="keywords" name="keywords" class="form-control" style="width:50%;"rows="1"></textarea>
+			    <p>Abstract (enter or upload)</p>
+			    <textarea id="summary" name="summary" class="form-control my-form" rows="10"></textarea>
+			  </div>
+			  <button type="button" id="metadata-submit" class="btn btn-default">Submit</button>
+			  <span class="btn btn-default glyphicon glyphicon-upload" id="upload"></span>
+			  <input id="files" type="file" style="display:none;">
+			</form>
+		  </div>
+	      </div>
+	      <div role="tabpanel" class="tab-pane fade" id="resources" aria-labelledBy="resources-tab">
+	      	<div class="col-md-12 extra-padded"><h2>PaperTrail Resource Recommendations</h2></div>
+		  </div>
+		  <div role="tabpanel" class="tab-pane fade in active" id="trend" aria-labelledBy="trend-tab">
+		  	<div class="col-md-12 extra-padded">
+		  		<h2>Trend Analysis</h2>
+		  		<div id="trend-analysis" class="panel-group">
+		  			<div class="panel panel-default"><div class="panel-heading">
+						<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#trend-analysis" href="#collapse1">
+						<b>Top Keyword Web Search Trends</b></a></h4></div>
+						<div id="collapse1" class="panel-collapse collapse in"></div>
+				    </div>
+		  		</div>
+		  	</div>
+		  </div>
+	    </div>
+	  </div><!-- /example -->
+
+    <footer>Text Analysis by <a href="www.alchemyapi.com">AlchemyAPI</a></footer>
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-tokenfield.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="js/analysis.js"></script>
+  </body>
+</html>

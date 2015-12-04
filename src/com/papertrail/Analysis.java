@@ -3,7 +3,6 @@ package com.papertrail;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -18,11 +17,11 @@ import org.json.JSONObject;
 
 @Path("/analysis")
 public class Analysis {
-	
-	private String apikey = "";
+
+	private String apikey = System.getenv("ALCHEMY_KEY");
 	private String urlPattern = "http://gateway-a.watsonplatform.net/calls/text/TextGetRankedKeywords?apikey=%s&text=%s&outputMode=json";
-	
-	private String extractKeywords(String summary) throws IOException, JSONException {
+
+	private JSONArray alchemyKeywords(String summary) throws IOException, JSONException {
 		
 		// Create an AlchemyAPI object.
 		summary = summary.replaceAll(" ", "%20");
@@ -45,20 +44,31 @@ public class Analysis {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		String query = "";
-		for (int i = 0; i < Math.min(5, keywords.length()); i++) {
-			  query = query + keywords.getJSONObject(i).get("text");
-			  if (i != Math.min(5, keywords.length()) - 1)
-					  query = query + ",";
+		return keywords;
+	}
+	
+	private String process(String summary) {
+		Utils utils = new Utils();
+		JSONArray processed = new JSONArray();
+		try {
+			JSONArray keywords = alchemyKeywords(summary);
+			for (int i = 0; i < keywords.length(); i++) {
+				if (keywords.getJSONObject(i).getDouble("relevance") < 0.65) {
+					break;
+				}
+				JSONObject trend = utils.queryTerm(keywords.getJSONObject(i).getString("text"));
+				System.out.println(trend.toString());
+				JSONObject item = new JSONObject();
+				item.put("text", keywords.getJSONObject(i).getString("text"));
+				item.put("relevance", keywords.getJSONObject(i).getString("relevance"));
+				item.put("trend", trend);
+				processed.put(item);
+			}
+		} catch (IOException | JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		String html = "<script type=\"text/javascript\" src=\"" +
-				      "//www.google.com/trends/embed.js?hl=en-US&q=" +
-					  query + "&cmpt=q&tz=Etc/GMT%2B5&tz=Etc/GMT%2B5&content=1&cid=TIMESERIES_GRAPH_0&export=5&w=500&h=330\"></script>";
-		PrintWriter writer = new PrintWriter("trend.html", "UTF-8");
-		writer.println(html);
-		writer.close();
-		return keywords.toString();
+		return processed.toString();
 	}
 
 	@POST
@@ -67,13 +77,13 @@ public class Analysis {
 			@FormParam("keywords") String keywords,
 			@FormParam("summary") String summary) {		
 		String response = "error";
-		try {
-			response = extractKeywords(summary);
-		} catch (IOException | JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		response = process(summary);
 		return response;
 	}
 
+	
+	public static void main(String[] args) {
+		Analysis an = new Analysis();
+		System.out.println(an.process("An empirical study of human perception of halftoned images was conducted to determine which of five different halftoning algorithms generated the best images. The subjects viewed each of the 20 stimuli (halftoned images) at two distances, and although all images were more preferred at the far distance, the rating of the pictures was dependent upon the algorithm used in generation. Images containing a high level of detail were rated highest when halftoned by the neural network and the simulated annealing algorithms of [4], whereas pictures that had little detail and many smooth surfaces were rated highest under the Floyd-Steinberg model [3]."));
+	}
 }

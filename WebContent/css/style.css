@@ -74,3 +74,18 @@ p {
   text-decoration: none;
   background-color: inherit;
 }
+
+.disclaimer {
+	color: #444;
+	font-size: 13px;
+}
+
+footer, footer > a {
+	color: white;
+	font-size: 16px;
+}
+
+footer {
+	text-align: center;
+	margin-bottom: 5px;
+}
