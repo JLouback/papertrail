@@ -1,21 +1,26 @@
 //Load the Visualization API and the piechart package.
 google.load('visualization', '1.0', {'packages':['corechart']});
 
+// Fill in the analysis data and restore original input data
 $(document).ready(function() {
 	putFormData()
 	gTrend();
 	academiaTrend();
+	putCitations()
 	$("#keywords").tokenfield({delimiter: ","});
 });
 
+// Puts back form data
 function putFormData() {
 	$("#title").val(localStorage.getItem('title'));
 	$("#keywords").val(localStorage.getItem('keywords'));
 	$("#summary").val(localStorage.getItem('summary'));
 }
 
+// Builds and inserts google search trends chart
 function gTrend() {
-	var keywordArray = $.parseJSON(localStorage.getItem('alchemy'));
+	var analysis = $.parseJSON(localStorage.getItem('alchemy'));
+	var keywordArray = analysis['trends'];
 	var query = "";
 	var counter = 1;
 	$.each(keywordArray, function(key, item) {
@@ -34,8 +39,10 @@ function gTrend() {
 	$("#collapse1").append(gchart);
 }
 
+// Builds and inserts academia trend charts
 function academiaTrend() {
-	var keywordArray = $.parseJSON(localStorage.getItem('alchemy'));
+	var analysis = $.parseJSON(localStorage.getItem('alchemy'));
+	var keywordArray = analysis['trends'];
 	var counter = 2;
 	$.each(keywordArray, function(key, item) {
 		$("#trend-analysis").append(collapsePanel(item.text, item.relevance, counter));
@@ -45,7 +52,24 @@ function academiaTrend() {
 	});
 }
 
+// Writes list of recommended citations
+function putCitations() {
+	var analysis = $.parseJSON(localStorage.getItem('alchemy'));
+	var keywordArray = analysis['citations'];
+	$.each(keywordArray, function(key, item) {
+		$("#citation-analysis").append(citation(item.title, item.author, item.year, item.summary));
+	});
+}
 
+// Returns html of citation recommendation entry
+function citation(title, author, year, summary) {
+	var html = "<h3>" + title + "</h3>\n" +
+			   "<p><b>" + author + ", " + year + "</b></p>\n" + 
+			   "<p>" + summary + "</p>\n";
+	return html;
+}
+
+// Structure for the collapsible pannel
 function collapsePanel(word, relevance, counter) {
 	var html = "<div class=\"panel panel-default\">\n<div class=\"panel-heading\">\n" +
 	"<h4 class=\"panel-title\">\n"+
@@ -57,9 +81,7 @@ function collapsePanel(word, relevance, counter) {
 	return html;
 }
 
-// Callback that creates and populates a data table,
-// instantiates the pie chart, passes in the data and
-// draws it.
+// Callback that creates and populates a google bar chart
 function drawChart(word, counter, trend) {
 	// Create the data table.
 	var data = new google.visualization.DataTable();

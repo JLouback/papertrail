@@ -16,19 +16,14 @@ import com.ibm.nosql.json.util.JSON;
 
 public class Utils {
 
+	private String databaseHost;
+	private int port;
+	private String databaseName;
+	private String user;
+	private String password;
 
-	private static final long serialVersionUID = 1L;
-
-	// set defaults
-	private String databaseHost = "localhost";
-	private int port = 50000;
-	private String databaseName = "mydb";
-	private String user = "myuser";
-	private String password = "mypass";
-	private String url = "myurl";
-
+	// Processes DB access credentials for future use
 	private boolean processVCAP() {
-		// VCAP_SERVICES is a system environment variable
 		String VCAP_SERVICES = System.getenv("VCAP_SERVICES");
 
 		if (VCAP_SERVICES != null) {
@@ -53,18 +48,16 @@ public class Utils {
 			port = (int)obj.get("port");
 			user = (String) obj.get("username");
 			password = (String) obj.get("password");
-			url = (String) obj.get("jdbcurl");
 		} else {
 			return false;
 		}
 		return true;
 	}
 	
+	// Returns the trend of a given term according to the dataset.
 	protected JSONObject queryTerm(String term) {
 		JSONObject trend = new JSONObject();
-		// process the VCAP env variable and set all the global connection parameters
 		if (processVCAP()) {
-	
 			// Connect to the Database
 			Connection con = null;
 			try {

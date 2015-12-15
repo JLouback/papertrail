@@ -1,3 +1,4 @@
+// Tokenizer and custom form submission
 $(document).ready(function() {
 
 	$("#metadata-submit").on("click", function(e) {
@@ -23,6 +24,7 @@ $(document).ready(function() {
 
 });
 
+// Form validation
 function validateForm() {
 	var summary = $("#summary").val();
 	if(summary == "") {
@@ -32,6 +34,7 @@ function validateForm() {
 	return true;
 }
 
+//Form validation
 $("#upload").click(function() {
 	if (!window.FileReader) {
 		alert("Your browser is not supported");
@@ -39,6 +42,7 @@ $("#upload").click(function() {
 	$("#files").click();
 });
 
+// File upload
 $("#files").change(function(e) {
 	var input = $("#files").get(0);
 	var reader = new FileReader();
@@ -55,6 +59,7 @@ function processFile(e) {
 	$("#summary").val(file);
 }
 
+// HTTP functions
 function createXHR(){
 	if(typeof XMLHttpRequest != "undefined"){
 		return new XMLHttpRequest();
@@ -70,6 +75,7 @@ function createXHR(){
 	return null;
 }
 
+//HTTP functions
 function xhrPost(url, title, keywords, summary, callback, errback){
 	var formData = new FormData();
 	formData.append("title", title);
@@ -86,7 +92,7 @@ function xhrPost(url, title, keywords, summary, callback, errback){
 			}
 		}
 	};
-	xhr.timeout = 3000;
+	xhr.timeout = 6000;
 	xhr.ontimeout = errback;
 	xhr.send(formData);
 }
