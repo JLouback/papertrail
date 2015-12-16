@@ -86,23 +86,30 @@ public class Analysis {
             Socket clientSocket = new Socket(host, port);
             PrintWriter outToServer = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
             outToServer.println(serverdata);
-            citations = inFromServer.readLine();
+            
+            StringBuilder sb = new StringBuilder("");
+            String line;
+            while((line=inFromServer.readLine())!=null){
+                sb.append(line);
+            }
+            citations = sb.toString();
+            
             System.out.println("From server:");
-            System.out.println(citations);
+            System.out.print(citations);
+            inFromServer.close();
 			clientSocket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        // Join data
-        JSONObject analysis = new JSONObject();
-        try {
-			JSONArray citearray = new JSONArray(citations);
+        
+		// Join data
+		JSONObject analysis = new JSONObject();
+		try {
 			analysis.put("trends", trends);
 			analysis.put("citations", citations);
-		} catch (JSONException e1) {
-			e1.printStackTrace();
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 		return analysis.toString();
 	}
