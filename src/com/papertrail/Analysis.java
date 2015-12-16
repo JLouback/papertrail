@@ -81,37 +81,21 @@ public class Analysis {
 		// Send data to server for citation prediction
 		String host = System.getenv("SERVER_HOST");
 		int port = Integer.valueOf(System.getenv("SERVER_PORT"));
-		String recommendations;
+		String citations = "";
         try {
             Socket clientSocket = new Socket(host, port);
             PrintWriter outToServer = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-            outToServer.println("test abs\n");
-            recommendations = inFromServer.readLine();
+            outToServer.println(serverdata);
+            citations = inFromServer.readLine();
+            System.out.println("From server:");
+            System.out.println(citations);
 			clientSocket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        //Fake for testing
-        JSONArray citations = new JSONArray(); 
-        JSONObject item = new JSONObject();
-        JSONObject item2 = new JSONObject();
-		try {
-			item.put("title", "Model-Driven Data Acquisition in Sensor Networks.");
-			item.put("author", "Amol Deshpande,Carlos Guestrin,Samuel Madden,Joseph M. Hellerstein,Wei Hong");
-			item.put("year", "2004");
-			item.put("summary", "Declarative queries are proving to be an attractive paradigm for ineracting with networks of wireless sensors. The metaphor that the sensornet is a database is problematic, however, because sensors do not exhaustively represent the data in the real world. In order to map the raw sensor readings onto physical reality, a model of that reality is required to complement the readings. In this paper, we enrich interactive sensor querying with statistical modeling techniques. We demonstrate that such models can help provide answers that are both more meaningful, and, by introducing approximations with probabilistic confidences, significantly more efficient to compute in both time and energy. Utilizing the combination of a model and live data acquisition raises the challenging optimization problem of selecting the best sensor readings to acquire, balancing the increase in the confidence of our answer against the communication and data acquisition costs in the network. We describe an exponential time algorithm for finding the optimal solution to this optimization problem, and a polynomial-time heuristic for identifying solutions that perform well in practice. We evaluate our approach on several real-world sensor-network data sets, taking into account the real measured data and communication quality, demonstrating that our model-based approach provides a high-fidelity representation of the real phenomena and leads to significant performance gains versus traditional data acquisition techniques.");
-			item2.put("title", "Semantic Checking of Questions Expressed in Predicate Calculus Language.");
-			item2.put("author", "Robert Demolombe");
-			item2.put("year", "1979");
-			item2.put("summary", "Not all predicate calculus WFF correspond to meaningful questions, In order to avoid this problem, +different authors have defined syntactically the WFF classes which are known to be significative. These restrictions are generally more severe than is necessary, and we have defined a much wider class of WFF : the evaluable formula. We prove that these WFF have a clearly defined sense. Moreover, we can easily test a formula to see if it is evaluable. Finally, we show how it is possible to deduce from a formula the conditions which have to be fulfilled by the predicate argument validity domains in order to obtain-answers which are not an empty set. We can thus reject questions which have a defined sense but which, in the context of a clearly determined application, cannot have an answer.");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		citations.put(item);
-		citations.put(item2);
         
 		// Join data
 		JSONObject analysis = new JSONObject();

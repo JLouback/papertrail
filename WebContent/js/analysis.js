@@ -55,9 +55,9 @@ function academiaTrend() {
 // Writes list of recommended citations
 function putCitations() {
 	var analysis = $.parseJSON(localStorage.getItem('alchemy'));
-	var keywordArray = analysis['citations'];
-	$.each(keywordArray, function(key, item) {
-		$("#citation-analysis").append(citation(item.title, item.author, item.year, item.summary));
+	var citationArray = $.parseJSON(analysis['citations']);
+	$.each(citationArray, function(key, item) {
+		$("#citation-analysis").append(citation(item.title, item.authors, item.year, item.summary));
 	});
 }
 
