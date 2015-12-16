@@ -91,7 +91,7 @@ public class Analysis {
             outToServer.println(serverdata);
             
             citations = inFromServer.readLine();
-            analysis.put("trends", trends);
+            analysis.put("trends", trends.toString());
 			analysis.put("citations", citations);
             System.out.println("From server:");
             System.out.print(citations);
