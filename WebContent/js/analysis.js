@@ -19,7 +19,7 @@ function putFormData() {
 
 // Builds and inserts google search trends chart
 function gTrend() {
-	var analysis = localStorage.getItem('alchemy').split(" pt_split \"")[0];
+	var analysis = localStorage.getItem('alchemy').split(" pt_split ")[0];
 	analysis = analysis.substr(1);
 	console.log("From server:");
 	console.log(analysis);
