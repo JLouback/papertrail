@@ -91,7 +91,7 @@ public class Analysis {
             
             JSONArray citations = new JSONArray(inFromServer.readLine());
             analysis.put("trends", trends);
-			analysis.put("citations", citations);
+			analysis.put("citations", "[{\"authors\":\"John\",\"year\":\"2004\",\"title\":\"Paper\", \"summary\":\"test summary\"}]");
             System.out.println("From server:");
             System.out.print(citations);
             inFromServer.close();
