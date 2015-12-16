@@ -52,6 +52,14 @@ function academiaTrend() {
 	});
 }
 
+//Returns html of citation recommendation entry
+function citation(title, author, year, summary) {
+	var html = "<h3>" + title + "</h3>\n" +
+			   "<p><b>" + author + ", " + year + "</b></p>\n" + 
+			   "<p>" + summary + "</p>\n";
+	return html;
+}
+
 // Writes list of recommended citations
 function putCitations() {
 	var analysis = $.parseJSON(localStorage.getItem('alchemy'));
@@ -59,14 +67,6 @@ function putCitations() {
 	$.each(citationArray, function(key, item) {
 		$("#citation-analysis").append(citation(item.title, item.authors, item.year, item.summary));
 	});
-}
-
-// Returns html of citation recommendation entry
-function citation(title, author, year, summary) {
-	var html = "<h3>" + title + "</h3>\n" +
-			   "<p><b>" + author + ", " + year + "</b></p>\n" + 
-			   "<p>" + summary + "</p>\n";
-	return html;
 }
 
 // Structure for the collapsible pannel
