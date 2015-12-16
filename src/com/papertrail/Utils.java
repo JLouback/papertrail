@@ -25,7 +25,6 @@ public class Utils {
 	// Processes DB access credentials for future use
 	private boolean processVCAP() {
 		String VCAP_SERVICES = System.getenv("VCAP_SERVICES");
-
 		if (VCAP_SERVICES != null) {
 			// parse the VCAP JSON structure
 			BasicDBObject obj = (BasicDBObject) JSON.parse(VCAP_SERVICES);
