@@ -64,6 +64,8 @@ function citation(title, author, year, summary) {
 function putCitations() {
 	var analysis = JSON.parse(localStorage.getItem('alchemy'));
 	console.log(analysis);
+	console.log("From server:");
+	console.log(localStorage.getItem('alchemy'));
 	var citationArray = analysis['citations'];
 	$.each(citationArray, function(key, item) {
 		$("#citation-analysis").append(citation(item.title, item.authors, item.year, item.summary));

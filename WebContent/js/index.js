@@ -86,7 +86,7 @@ function xhrPost(url, title, keywords, summary, callback, errback){
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4){
 			if(xhr.status >= 200){
-				callback(xhr.responseText);
+				callback(JSON.stringify(xhr.responseText));
 			}else{
 				errback("service not available");
 			}
