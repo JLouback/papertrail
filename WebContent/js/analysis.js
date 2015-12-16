@@ -20,7 +20,7 @@ function putFormData() {
 // Builds and inserts google search trends chart
 function gTrend() {
 	var analysis = $.parseJSON(localStorage.getItem('alchemy'));
-	var keywordArray = $.parseJSON(analysis['trends']);
+	var keywordArray = analysis['trends'];
 	var query = "";
 	var counter = 1;
 	$.each(keywordArray, function(key, item) {
@@ -42,7 +42,7 @@ function gTrend() {
 // Builds and inserts academia trend charts
 function academiaTrend() {
 	var analysis = $.parseJSON(localStorage.getItem('alchemy'));
-	var keywordArray = $.parseJSON(analysis['trends']);
+	var keywordArray = analysis['trends'];
 	var counter = 2;
 	$.each(keywordArray, function(key, item) {
 		$("#trend-analysis").append(collapsePanel(item.text, item.relevance, counter));
@@ -63,7 +63,7 @@ function citation(title, author, year, summary) {
 // Writes list of recommended citations
 function putCitations() {
 	var analysis = $.parseJSON(localStorage.getItem('alchemy'));
-	var citationArray = $.parseJSON(analysis['citations']);
+	var citationArray = analysis['citations'];
 	$.each(citationArray, function(key, item) {
 		$("#citation-analysis").append(citation(item.title, item.authors, item.year, item.summary));
 	});

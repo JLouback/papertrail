@@ -81,7 +81,6 @@ public class Analysis {
 		// Send data to server for citation prediction
 		String host = System.getenv("SERVER_HOST");
 		int port = Integer.valueOf(System.getenv("SERVER_PORT"));
-		String citations;
 		// Join data
 		JSONObject analysis = new JSONObject();
         try {
@@ -90,7 +89,7 @@ public class Analysis {
             BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             outToServer.println(serverdata);
             
-            citations = inFromServer.readLine();
+            JSONArray citations = new JSONArray(inFromServer.readLine());
             analysis.put("trends", trends);
 			analysis.put("citations", citations);
             System.out.println("From server:");
