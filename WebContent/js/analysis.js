@@ -21,6 +21,7 @@ function putFormData() {
 function gTrend() {
 	var analysis = localStorage.getItem('alchemy').split(" pt_split ")[0];
 	analysis = analysis.substr(1);
+	analysis = analysis.replace(/\\/g, '')
 	console.log("From server:");
 	console.log(analysis);
 	var keywordArray = $.parseJSON(analysis);
@@ -47,6 +48,7 @@ function gTrend() {
 function academiaTrend() {
 	var analysis = localStorage.getItem('alchemy').split(" pt_split ")[0];
 	analysis = analysis.substr(1);
+	analysis = analysis.replace(/\\/g, '')
 	var keywordArray = $.parseJSON(analysis);
 	var counter = 2;
 	$.each(keywordArray, function(key, item) {
@@ -69,11 +71,10 @@ function citation(title, author, year, summary) {
 function putCitations() {
 	var analysis = localStorage.getItem('alchemy').split(" pt_split ")[1];
 	analysis = analysis.substr(0, -1);
+	analysis = analysis.replace(/\\/g, '')
 	console.log("From server:");
 	console.log(analysis);
-	var keywordArray = $.parseJSON(analysis);
-	console.log(keywordArray);
-	var citationArray = $.parseJSON(analysis['citations']);
+	var citationArray = $.parseJSON(analysis);
 	console.log(citationArray);
 	$.each(citationArray, function(key, item) {
 		$("#citation-analysis").append(citation(item.title, item.authors, item.year, item.summary));
