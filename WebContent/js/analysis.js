@@ -19,7 +19,8 @@ function putFormData() {
 
 // Builds and inserts google search trends chart
 function gTrend() {
-	var analysis = localStorage.getItem('alchemy').split(" pt_split ")[0];
+	var analysis = localStorage.getItem('alchemy').split(" pt_split \"")[0];
+	analysis = analysis.substr(1);
 	console.log("From server:");
 	console.log(analysis);
 	var keywordArray = $.parseJSON(analysis);
@@ -44,8 +45,9 @@ function gTrend() {
 
 // Builds and inserts academia trend charts
 function academiaTrend() {
-	var analysis = $.parseJSON(localStorage.getItem('alchemy'));
-	var keywordArray = $.parseJSON(analysis['trends']);
+	var analysis = localStorage.getItem('alchemy').split(" pt_split ")[0];
+	analysis = analysis.substr(1);
+	var keywordArray = $.parseJSON(analysis);
 	var counter = 2;
 	$.each(keywordArray, function(key, item) {
 		$("#trend-analysis").append(collapsePanel(item.text, item.relevance, counter));
@@ -65,9 +67,12 @@ function citation(title, author, year, summary) {
 
 // Writes list of recommended citations
 function putCitations() {
-	var analysis = $.parseJSON(localStorage.getItem('alchemy'));
-	console.log("From server2:");
+	var analysis = localStorage.getItem('alchemy').split(" pt_split ")[1];
+	analysis = analysis.substr(0, -1);
+	console.log("From server:");
 	console.log(analysis);
+	var keywordArray = $.parseJSON(analysis);
+	console.log(keywordArray);
 	var citationArray = $.parseJSON(analysis['citations']);
 	console.log(citationArray);
 	$.each(citationArray, function(key, item) {
