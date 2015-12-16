@@ -70,9 +70,8 @@ function citation(title, author, year, summary) {
 // Writes list of recommended citations
 function putCitations() {
 	var analysis = localStorage.getItem('alchemy').split(" pt_split ")[1];
-	analysis = analysis.substr(0, -1);
 	analysis = analysis.replace(/\\/g, '')
-	console.log("From server:");
+	console.log("From server pt2:");
 	console.log(analysis);
 	var citationArray = $.parseJSON(analysis);
 	console.log(citationArray);
