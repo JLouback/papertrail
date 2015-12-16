@@ -81,7 +81,7 @@ public class Analysis {
 		// Send data to server for citation prediction
 		String host = System.getenv("SERVER_HOST");
 		int port = Integer.valueOf(System.getenv("SERVER_PORT"));
-		String citations = "";
+		String citations = "[{\"authors\": \"Goretti K. Y. Chan,Qing Li,Ling Feng\", \"year\": \"1999\", \"summary\": \"In this paper, we describe the design of a data warehousing system for an engineering company 'R'. A cost model was developed for this system to enable the evaluation of the total costs and benefits involved in selecting each materialized view. Using the cost analysis methodology for evaluation, an adapted greedy algorithm has been implemented for the selection of materialized views. The algorithm and cost model were applied to a set of real-life database items extracted from company 'R'. By selecting the most cost effective set of materialized summary views, the total of the maintenance, storage and query costs of the system is optimized, thereby resulting in an efficient data warehousing system.\", \"title\": \"Design and Selection of Materialized Views in a Data Warehousing Environment: A Case Study.\"}]";
         try {
             Socket clientSocket = new Socket(host, port);
             PrintWriter outToServer = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -89,8 +89,6 @@ public class Analysis {
             outToServer.println(serverdata);
             
             citations = inFromServer.readLine();
-            //System.out.println("From server:");
-            //System.out.print(citations);
 			clientSocket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
