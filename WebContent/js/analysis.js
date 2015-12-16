@@ -19,11 +19,11 @@ function putFormData() {
 
 // Builds and inserts google search trends chart
 function gTrend() {
-	var analysis = localStorage.getItem('alchemy');
-	console.log("From server raw:");
+	var analysis = $.parseJSON(localStorage.getItem('alchemy'));
+	console.log("From server proc:");
 	console.log(analysis);
 	var keywordArray = analysis.trends;
-	console.log("From server processed:");
+	console.log(analysis.trends);
 	console.log(keywordArray);
 	var query = "";
 	var counter = 1;
