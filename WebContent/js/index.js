@@ -92,7 +92,7 @@ function xhrPost(url, title, keywords, summary, callback, errback){
 			}
 		}
 	};
-	xhr.timeout = 20000;
+	xhr.timeout = 25000;
 	xhr.ontimeout = errback;
 	xhr.send(formData);
 }

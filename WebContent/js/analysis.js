@@ -7,7 +7,6 @@ $(document).ready(function() {
 	gTrend();
 	academiaTrend();
 	putCitations();
-	$("#keywords").tokenfield({delimiter: ","});
 });
 
 // Puts back form data
@@ -15,6 +14,9 @@ function putFormData() {
 	$("#title").val(localStorage.getItem('title'));
 	$("#keywords").val(localStorage.getItem('keywords'));
 	$("#summary").val(localStorage.getItem('summary'));
+	$("#title").prop('disabled', true);
+	$("#keywords").prop('disabled', true);
+	$("#summary").prop('disabled', true);
 }
 
 // Builds and inserts google search trends chart
