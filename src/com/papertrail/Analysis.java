@@ -97,7 +97,7 @@ public class Analysis {
      	JSONObject analysis = new JSONObject();
      	try {
 			analysis.put("trends", trends);
-			analysis.put("citations", citations);
+			analysis.put("citations", new JSONArray(citations));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
