@@ -71,6 +71,7 @@ function citation(title, author, year, summary) {
 function putCitations() {
 	var analysis = localStorage.getItem('alchemy').split(" pt_split ")[1];
 	analysis = analysis.replace(/\\/g, '')
+	analysis = analysis.substr(0, str.length - 1);
 	console.log("From server pt2:");
 	console.log(analysis);
 	var citationArray = $.parseJSON(analysis);
