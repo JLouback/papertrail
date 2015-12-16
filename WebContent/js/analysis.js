@@ -63,7 +63,7 @@ function citation(title, author, year, summary) {
 // Writes list of recommended citations
 function putCitations() {
 	var analysis = $.parseJSON(localStorage.getItem('alchemy'));
-	var citationArray = $.parseJSON(analysis['citations']);
+	var citationArray = analysis['citations'];
 	$.each(citationArray, function(key, item) {
 		$("#citation-analysis").append(citation(item.title, item.authors, item.year, item.summary));
 	});
