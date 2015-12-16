@@ -21,8 +21,8 @@ function putFormData() {
 function gTrend() {
 	var analysis = $.parseJSON(localStorage.getItem('alchemy'));
 	console.log("From server:");
-	console.log(analysis);
-	var keywordArray = $.parseJSON(analysis['trends']);
+	console.log(analysis.trends);
+	var keywordArray = analysis.trends;
 	console.log(keywordArray);
 	var query = "";
 	var counter = 1;
