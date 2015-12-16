@@ -93,17 +93,16 @@ public class Analysis {
             System.out.println(citations);
 			clientSocket.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-		// Join data
-		JSONObject analysis = new JSONObject();
-		try {
+        // Join data
+        JSONObject analysis = new JSONObject();
+        try {
+			JSONArray citearray = new JSONArray(citations);
 			analysis.put("trends", trends);
 			analysis.put("citations", citations);
-		} catch (JSONException e) {
-			e.printStackTrace();
+		} catch (JSONException e1) {
+			e1.printStackTrace();
 		}
 		return analysis.toString();
 	}
