@@ -6,7 +6,7 @@ $(document).ready(function() {
 	putFormData()
 	gTrend();
 	academiaTrend();
-	putCitations()
+	putCitations();
 	$("#keywords").tokenfield({delimiter: ","});
 });
 
