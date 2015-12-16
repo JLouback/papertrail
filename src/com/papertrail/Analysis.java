@@ -94,14 +94,8 @@ public class Analysis {
 			e.printStackTrace();
 		}
         // Join data
-     	JSONObject analysis = new JSONObject();
-     	try {
-			analysis.put("trends", trends);
-			analysis.put("citations", new JSONArray(citations));
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return analysis.toString();
+     	String analysis = trends.toString() + " pt_split " + citations.toString();
+		return analysis;
 	}
 
 	@POST
