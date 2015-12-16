@@ -3,7 +3,7 @@ google.load('visualization', '1.0', {'packages':['corechart']});
 
 // Fill in the analysis data and restore original input data
 $(document).ready(function() {
-	putFormData()
+	putFormData();
 	gTrend();
 	academiaTrend();
 	putCitations();
@@ -25,11 +25,11 @@ function gTrend() {
 	var counter = 1;
 	$.each(keywordArray, function(key, item) {
 		if (counter > 1) {
-			query = query + ","
+			query = query + ",";
 		}
 		query = query + item.text;
 		if (counter == Math.min(5, keywordArray.length)) {
-			return false
+			return false;
 		}
 		counter += 1;
  	});
