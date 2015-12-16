@@ -4,9 +4,9 @@ google.load('visualization', '1.0', {'packages':['corechart']});
 // Fill in the analysis data and restore original input data
 $(document).ready(function() {
 	putFormData();
-	putCitations();
 	gTrend();
 	academiaTrend();
+	putCitations();
 	$("#keywords").tokenfield({delimiter: ","});
 });
 
