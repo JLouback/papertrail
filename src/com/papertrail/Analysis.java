@@ -81,22 +81,26 @@ public class Analysis {
 		// Send data to server for citation prediction
 		String host = System.getenv("SERVER_HOST");
 		int port = Integer.valueOf(System.getenv("SERVER_PORT"));
-		// Join data
-		JSONObject analysis = new JSONObject();
+		String citations = "";
         try {
             Socket clientSocket = new Socket(host, port);
             PrintWriter outToServer = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             outToServer.println(serverdata);
             
-            JSONArray citations = new JSONArray(inFromServer.readLine());
-            analysis.put("trends", trends);
-			analysis.put("citations", "[{\"authors\":\"John\",\"year\":\"2004\",\"title\":\"Paper\", \"summary\":\"test summary\"}]");
-            System.out.println("From server:");
-            System.out.print(citations);
-            inFromServer.close();
+            citations = inFromServer.readLine();
+            //System.out.println("From server:");
+            //System.out.print(citations);
 			clientSocket.close();
-		} catch (IOException | JSONException e) {
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        // Join data
+     	JSONObject analysis = new JSONObject();
+     	try {
+			analysis.put("trends", trends);
+			analysis.put("citations", citations);
+		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 		return analysis.toString();
